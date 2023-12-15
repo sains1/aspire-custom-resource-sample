@@ -1,0 +1,14 @@
+services:
+  opensearch-node1: # This is also the hostname of the container within the Docker network (i.e. https://opensearch-node1/)
+    image: opensearchproject/opensearch:2 # Specifying the latest available image - modify if you want a specific version
+    container_name: opensearch-node1
+    environment:
+      - "discovery.type=single-node" # Set min and max JVM heap sizes to at least 50% of system RAM
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
+    ports:
+      - 9200:9200 # REST API
+      - 9600:9600 # Performance Analyzer
+
+volumes:
+  opensearch-data1:
